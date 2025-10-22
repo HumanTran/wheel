@@ -1,8 +1,8 @@
 // Danh sách các phần thưởng (8 phần)
 const prizes = [
-    '-15%',
-    '-10%',
+    'Chúc bạn may mắn lần sau',
     '-5%',
+    'Chúc bạn may mắn lần sau',
     'Chúc bạn may mắn lần sau',
     '-10%',
     'Chúc bạn may mắn lần sau',
