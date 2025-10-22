@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vòng Quay May Mắn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo" class="logo">
+        
+        <div class="wheel-wrapper">
+            <div class="wheel-container">
+                <div class="arrow"></div>
+                <div class="wheel" id="wheel">
+                    <div class="segment" style="--i: 0; --color: #e74c3c;"></div>
+                    <div class="segment" style="--i: 1; --color: #3498db;"></div>
+                    <div class="segment" style="--i: 2; --color: #2ecc71;"></div>
+                    <div class="segment" style="--i: 3; --color: #f39c12;"></div>
+                    <div class="segment" style="--i: 4; --color: #9b59b6;"></div>
+                    <div class="segment" style="--i: 5; --color: #1abc9c;"></div>
+                    <div class="segment" style="--i: 6; --color: #e67e22;"></div>
+                    <div class="segment" style="--i: 7; --color: #34495e;"></div>
+                    
+                    <div class="prize-text" style="--i: 0;">-15%</div>
+                    <div class="prize-text" style="--i: 1;">-10%</div>
+                    <div class="prize-text" style="--i: 2;">-5%</div>
+                    <div class="prize-text" style="--i: 3;">Chúc bạn<br>may mắn<br>lần sau</div>
+                    <div class="prize-text" style="--i: 4;">-10%</div>
+                    <div class="prize-text" style="--i: 5;">Chúc bạn<br>may mắn<br>lần sau</div>
+                    <div class="prize-text" style="--i: 6;">-5%</div>
+                    <div class="prize-text" style="--i: 7;">Chúc bạn<br>may mắn<br>lần sau</div>
+                    
+                    <div class="wheel-center"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="result-container">
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
