@@ -1,13 +1,10 @@
 // Danh sách các phần thưởng (8 phần)
 const prizes = [
-    '-15%',
+    '15%',
+    '10%',
+    '5%',
     '-10%',
     '-5%',
-    'Chúc bạn may mắn lần sau',
-    '-10%',
-    'Chúc bạn may mắn lần sau',
-    '-5%',
-    'Chúc bạn may mắn lần sau'
 ];
 
 const wheel = document.getElementById('wheel');
@@ -69,4 +66,5 @@ wheel.addEventListener('click', spinWheel);
 
 // Khởi tạo: set vị trí ban đầu
 wheel.style.transform = `rotate(${currentRotation}deg)`;
+
 
