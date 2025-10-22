@@ -3,8 +3,8 @@ const prizes = [
     '15%',
     '10%',
     '5%',
-    '-10%',
-    '-5%',
+    '10%',
+    '5%',
 ];
 
 const wheel = document.getElementById('wheel');
@@ -66,5 +66,6 @@ wheel.addEventListener('click', spinWheel);
 
 // Khởi tạo: set vị trí ban đầu
 wheel.style.transform = `rotate(${currentRotation}deg)`;
+
 
 
