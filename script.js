@@ -1,14 +1,16 @@
 // Danh sách các phần thưởng (8 phần)
 const prizes = [
-    '15%',
-    '10%',
-    '5%',
-    '10%',
-    '5%',
+    '-15%',
+    '-10%',
+    '-5%',
+    'Chúc bạn may mắn lần sau',
+    '-10%',
+    'Chúc bạn may mắn lần sau',
+    '-5%',
+    'Chúc bạn may mắn lần sau'
 ];
 
 const wheel = document.getElementById('wheel');
-const resultDiv = document.getElementById('result');
 
 let currentRotation = 0;
 let isSpinning = false;
@@ -21,8 +23,6 @@ function spinWheel() {
     isSpinning = true;
     hasSpun = true; // Đánh dấu đã quay
     wheel.style.cursor = 'not-allowed'; // Đổi cursor
-    resultDiv.classList.remove('show');
-    resultDiv.textContent = '';
     
     // Random chọn phần thắng (0-7)
     const winningIndex = Math.floor(Math.random() * prizes.length);
@@ -45,19 +45,9 @@ function spinWheel() {
     // Cập nhật rotation hiện tại
     currentRotation = finalRotation % 360;
     
-    // Hiển thị kết quả sau khi quay xong (8 giây thay vì 5 giây)
+    // Đợi animation hoàn tất
     setTimeout(() => {
-        const prizeText = prizes[winningIndex];
-        if (prizeText.includes('%')) {
-            resultDiv.innerHTML = `🎉 Chúc mừng! Bạn nhận được giảm giá <strong>${prizeText}</strong> 🎉`;
-        } else {
-            resultDiv.innerHTML = `${prizeText} 💫`;
-        }
-        resultDiv.classList.add('show');
-        
-        setTimeout(() => {
-            isSpinning = false;
-        }, 500);
+        isSpinning = false;
     }, 8000);
 }
 
@@ -66,6 +56,4 @@ wheel.addEventListener('click', spinWheel);
 
 // Khởi tạo: set vị trí ban đầu
 wheel.style.transform = `rotate(${currentRotation}deg)`;
-
-
 
