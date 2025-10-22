@@ -18,38 +18,87 @@ let hasSpun = false; // Biến kiểm tra đã quay chưa
 
 // Hàm quay vòng
 function spinWheel() {
-    if (isSpinning || hasSpun) return; // Không cho quay nếu đã quay rồi
-    
-    isSpinning = true;
-    hasSpun = true; // Đánh dấu đã quay
-    wheel.style.cursor = 'not-allowed'; // Đổi cursor
-    
-    // Random chọn phần thắng (0-7)
+    // Nếu đang quay hoặc đã quay rồi thì không cho quay tiếp
+    if (isSpinning || hasSpun) return;
+
+    isSpinning = true;   // đánh dấu đang quay
+    hasSpun = true;      // đánh dấu đã quay
+    wheel.style.cursor = 'not-allowed'; // đổi con trỏ chuột
+
+    // Chọn ngẫu nhiên phần thưởng (0-7)
     const winningIndex = Math.floor(Math.random() * prizes.length);
-    
-    // Tính góc cho mỗi phần (360 / 8 = 45 độ)
+
+    // Góc mỗi phần = 360 độ / số phần thưởng
     const degreesPerSection = 360 / prizes.length;
-    
-    // Tính góc đích để mũi tên chỉ vào giữa phần thắng
-    // Mũi tên ở trên cùng (0 độ), nên ta cần quay ngược lại
-    const targetDegree = 360 - (winningIndex * degreesPerSection + degreesPerSection / 2);
-    
-    // Thêm 7-10 vòng quay để tạo hiệu ứng (tăng từ 5-7 lên 7-10)
+
+    // Góc mục tiêu để mũi tên trúng phần thưởng
+    // Mỗi phần có góc trung tâm = index * degreesPerSection + nửa phần
+    const targetDegree = winningIndex * degreesPerSection + degreesPerSection / 2;
+
+    // Thêm 7-10 vòng quay đầy đủ để tạo hiệu ứng (mượt hơn)
     const extraSpins = 7 + Math.floor(Math.random() * 4);
+
+    // Tổng góc quay = số vòng quay + góc đến phần thắng
     const totalRotation = extraSpins * 360 + targetDegree;
-    
-    // Quay vòng
+
+    // Góc cuối cùng = góc hiện tại + tổng quay
     const finalRotation = currentRotation + totalRotation;
+
+    // Thực hiện quay vòng
     wheel.style.transform = `rotate(${finalRotation}deg)`;
-    
-    // Cập nhật rotation hiện tại
+
+    // Cập nhật góc hiện tại (mod 360 để giữ giá trị nhỏ)
     currentRotation = finalRotation % 360;
-    
-    // Đợi animation hoàn tất
+
+    // Đợi animation kết thúc (ở đây 8s)
     setTimeout(() => {
         isSpinning = false;
+        const prize = getPrizeTextAtArrow();
+        showResult(prize); // <--- sửa ở đây
     }, 8000);
 }
+
+function getPrizeTextAtArrow() {
+    const prizeTexts = document.querySelectorAll('.prize-text');
+    const arrow = document.querySelector('.arrow'); // mũi tên
+
+    const arrowRect = arrow.getBoundingClientRect();
+    const arrowX = arrowRect.left + arrowRect.width / 2;
+    const arrowY = arrowRect.top + arrowRect.height / 2;
+
+    let minDistance = Infinity;
+    let prizeIndex = 0;
+
+    prizeTexts.forEach((text, i) => {
+        const rect = text.getBoundingClientRect();
+        const textX = rect.left + rect.width / 2;
+        const textY = rect.top + rect.height / 2;
+
+        // Khoảng cách Euclidean giữa mũi tên và text
+        const distance = Math.sqrt((textX - arrowX) ** 2 + (textY - arrowY) ** 2);
+
+        if (distance < minDistance) {
+            minDistance = distance;
+            prizeIndex = i;
+        }
+    });
+
+    return prizeTexts[prizeIndex].textContent;
+}
+
+function showResult(prize) {
+    const resultEl = document.getElementById('result');
+    if(prize == "Chúc bạn may mắn lần sau"){
+        resultEl.textContent = "Chia buồn với ní";
+    }
+    else{
+        resultEl.textContent = "Ní được giảm " + prize.replace('-', '');
+    }
+
+    resultEl.classList.add('show'); // thêm class show để bật animation
+}
+
+
 
 // Event listener - chỉ click vào vòng quay
 wheel.addEventListener('click', spinWheel);
