@@ -1,13 +1,13 @@
 // Danh sách các phần thưởng (8 phần)
 const prizes = [
-    'Giải Nhất',
-    'Giải Nhì', 
-    'Giải Ba',
-    'Giải Tư',
-    'Giải Năm',
-    'Giải Sáu',
-    'Giải Bảy',
-    'Giải Tám'
+    '-15%',
+    '-10%',
+    '-5%',
+    'Chúc bạn may mắn lần sau',
+    '-10%',
+    'Chúc bạn may mắn lần sau',
+    '-5%',
+    'Chúc bạn may mắn lần sau'
 ];
 
 const wheel = document.getElementById('wheel');
@@ -50,7 +50,12 @@ function spinWheel() {
     
     // Hiển thị kết quả sau khi quay xong (8 giây thay vì 5 giây)
     setTimeout(() => {
-        resultDiv.textContent = prizes[winningIndex];
+        const prizeText = prizes[winningIndex];
+        if (prizeText.includes('%')) {
+            resultDiv.innerHTML = `🎉 Chúc mừng! Bạn nhận được giảm giá <strong>${prizeText}</strong> 🎉`;
+        } else {
+            resultDiv.innerHTML = `${prizeText} 💫`;
+        }
         resultDiv.classList.add('show');
         
         setTimeout(() => {
