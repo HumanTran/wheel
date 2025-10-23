@@ -89,10 +89,10 @@ function getPrizeTextAtArrow() {
 function showResult(prize) {
     const resultEl = document.getElementById('result');
     if(prize == "Chúc bạn may mắn lần sau"){
-        resultEl.textContent = "Chia buồn với ní";
+        resultEl.textContent = "Chia buồn với bạn :<";
     }
     else{
-        resultEl.textContent = "Ní được giảm " + prize.replace('-', '');
+        resultEl.textContent = "Bạn được giảm " + prize.replace('-', '');
     }
 
     resultEl.classList.add('show'); // thêm class show để bật animation
@@ -105,4 +105,3 @@ wheel.addEventListener('click', spinWheel);
 
 // Khởi tạo: set vị trí ban đầu
 wheel.style.transform = `rotate(${currentRotation}deg)`;
-
